@@ -1,9 +1,10 @@
 async   = require 'async'
+cozyUrl = require './cozy_url'
 request = require 'request-json-light'
 should  = require 'should'
 
 
-url    = 'http://localhost:9121'
+url    = cozyUrl.getFilesUrl()
 client = request.newClient url
 
 # Manipulate files and folders on a remote cozy, via the files application

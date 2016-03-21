@@ -1,4 +1,5 @@
 async   = require 'async'
+cozyUrl = require './cozy_url'
 del     = require 'del'
 faker   = require 'faker'
 fs      = require 'fs-extra'
@@ -22,9 +23,9 @@ module.exports = helpers =
 helpers.url = "#{helpers.scheme}://#{helpers.host}:#{helpers.port}/"
 
 module.exports.ensurePreConditions = (done) ->
-    ports = [5984, 9104, 9101, 9121]
-    async.map ports, (port, cb) ->
-        client = request.newClient "http://#{helpers.host}:#{port}"
+    urls = [cozyUrl.getCouchUrl(), cozyUrl.getProxyUrl(), cozyUrl.getDataSystemUrl(), cozyUrl.getFilesUrl()]
+    async.map urls, (url, cb) ->
+        client = request.newClient url
         client.get '/', ((err, res) -> cb null, res?.statusCode), false
     , (err, results) ->
         should.not.exist err
