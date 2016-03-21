@@ -96,8 +96,10 @@ class Pouch
             if err
                 callback err
             else if res.rows.length is 0
+                log.error "NONONON"
                 callback status: 404, message: 'missing'
             else
+                log.info "oUIOUIO"
                 callback null, res.rows[0].doc
 
 

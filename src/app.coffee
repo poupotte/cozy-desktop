@@ -70,8 +70,12 @@ class App
             (credentials, next) ->
                 password = credentials.password
                 config = file: true
+                log.info "BOUM deviceName: ", deviceName
+                log.info "BOUM password: ", password
                 filterSDK.setDesignDoc cozyUrl, deviceName, password, config, \
                         (err) ->
+                    log.info "Woooooooo" if err
+                    log.info "Weeeeeeee" unless err
                     next err, credentials
         ], (err, credentials) =>
             if err

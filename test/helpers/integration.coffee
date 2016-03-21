@@ -60,12 +60,20 @@ module.exports.clean = (done) ->
                 del.sync @basePath
                 done()
             , 200
+        console.log "#######"
+        console.log err
+        console.log "#######"
         should.not.exist err
         if @app.sync
             @app.stopSync (err) ->
+                console.log "2#######"
+                console.log err
+                console.log "2#######"
                 should.not.exist err
+                console.log callback.toString()
                 callback()
         else
+            console.log "MEGABOOM"
             callback()
 
 

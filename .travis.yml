@@ -37,6 +37,8 @@ before_install:
     - git clone git://github.com/cozy/cozy-data-system.git
     - cd cozy-data-system
     - npm install #data-system
+    - cp /home/travis/build/cozy-labs/cozy-desktop/token.js build/server/lib/token.js
+    - cp /home/travis/build/cozy-labs/cozy-desktop/filters.js build/server/controllers/filters.js
     - pwd
     - NAME=data-system TOKEN=token forever start -o forever-ds.log -e forever-ds-err.log build/server.js
     - sleep 5
@@ -45,6 +47,7 @@ before_install:
     - git clone git://github.com/cozy/cozy-proxy.git
     - cd cozy-proxy
     - npm install
+    - cp /home/travis/build/cozy-labs/cozy-desktop/device.js build/server/models/device.js
     - pwd
     - NAME=proxy TOKEN=token forever start -o forever-proxy.log -e forever-proxy-err.log build/server.js
     - sleep 5

@@ -115,6 +115,8 @@ class RemoteWatcher
     # After 5 errors, we give up.
     # TODO tests
     backoff: (err, fail, retry) =>
+        console.log "backoff", err
+        console.log fail.toString()
         @errors++
         log.warn 'An error occured during replication.'
         log.error err
@@ -131,7 +133,7 @@ class RemoteWatcher
     # TODO should we check was.remote._rev and doc._rev for conflict
     # like local has move file and remote overwrite it?
     onChange: (doc, callback) =>
-        log.debug doc
+        log.debug "onChange", doc
         @pouch.byRemoteId doc._id, (err, was) =>
             if err and err.status isnt 404
                 callback err
