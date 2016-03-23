@@ -14,6 +14,7 @@ permissions = {};
 tokens = {};
 
 productionOrTest = (ref = process.env.NODE_ENV) === 'production' || ref === 'test';
+console.log(process.env.NODE_ENV)
 
 checkToken = module.exports.checkToken = function(auth) {
   var password, username;
@@ -124,6 +125,7 @@ updatePermissions = function(access, callback) {
   var description, docType, login, ref1;
   login = access.login;
   console.log("productionOrTest: ", productionOrTest);
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV)
   if (productionOrTest) {
     console.log("access.token: ",access.token)
     if (access.token != null) {
