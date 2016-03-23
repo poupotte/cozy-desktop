@@ -120,16 +120,15 @@ module.exports.checkProxyHome = function(auth, callback) {
 };
 
 updatePermissions = function(access, callback) {
-    log.debug("updatePermissions");
+  console.log("updatePermissions");
   var description, docType, login, ref1;
   login = access.login;
-    log.debug("productionOrTest: ", productionOrTest);
+  console.log("productionOrTest: ", productionOrTest);
   if (productionOrTest) {
-      log.debug("access: ", access);
+    console.log("access.token: ",access.token)
     if (access.token != null) {
-        console.log("access.token: ", access.token);
-        console.log("login: ", login);
       tokens[login] = access.token;
+      console.log(tokens)
     }
     permissions[login] = {};
     if (access.permissions != null) {
@@ -150,6 +149,7 @@ updatePermissions = function(access, callback) {
 };
 
 addAccess = module.exports.addAccess = function(doc, callback) {
+  console.log('addAccess')
   var access;
   access = {
     docType: "Access",
@@ -158,6 +158,7 @@ addAccess = module.exports.addAccess = function(doc, callback) {
     app: doc.id || doc._id,
     permissions: doc.permissions
   };
+  console.log(access)
   return db.save(access, function(err, doc) {
     if (err != null) {
       log.error(err);
